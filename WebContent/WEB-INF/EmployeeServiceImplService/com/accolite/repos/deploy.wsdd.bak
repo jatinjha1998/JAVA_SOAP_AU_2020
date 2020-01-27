@@ -15,7 +15,7 @@
   <service name="EmployeeServiceImpl" provider="java:RPC" style="rpc" use="encoded">
       <parameter name="wsdlTargetNamespace" value="http://repos.accolite.com"/>
       <parameter name="wsdlServiceElement" value="EmployeeServiceImplService"/>
-      <parameter name="schemaUnqualified" value="http://repos.accolite.com,http://xml.apache.org/xml-soap"/>
+      <parameter name="schemaUnqualified" value="http://repos.accolite.com"/>
       <parameter name="wsdlServicePort" value="EmployeeServiceImpl"/>
       <parameter name="className" value="com.accolite.repos.EmployeeServiceImplSoapBindingImpl"/>
       <parameter name="wsdlPortType" value="EmployeeServiceImpl"/>
@@ -26,7 +26,7 @@
       <operation name="addUsers" qname="operNS:addUsers" xmlns:operNS="http://repos.accolite.com" soapAction="" >
         <parameter qname="emp" type="tns:Employee" xmlns:tns="http://repos.accolite.com"/>
       </operation>
-      <operation name="getAllUser" qname="operNS:getAllUser" xmlns:operNS="http://repos.accolite.com" returnQName="getAllUserReturn" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://repos.accolite.com" returnItemType="tns2:anyType" xmlns:tns2="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="getAllUser" qname="operNS:getAllUser" xmlns:operNS="http://repos.accolite.com" returnQName="getAllUserReturn" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
       </operation>
       <operation name="editUsers" qname="operNS:editUsers" xmlns:operNS="http://repos.accolite.com" returnQName="editUsersReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="id" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
@@ -43,13 +43,6 @@
         type="java:com.accolite.repos.Employee"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
-        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-      />
-      <arrayMapping
-        xmlns:ns="http://repos.accolite.com"
-        qname="ns:ArrayOf_xsd_anyType"
-        type="java:java.lang.Object[]"
-        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
   </service>

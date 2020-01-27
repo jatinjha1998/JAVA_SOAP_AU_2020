@@ -12,9 +12,9 @@ public class EmployeeDao {
 	HashMap<String,Employee> employee_data = new HashMap<String,Employee>();
 	public EmployeeDao(){
 		Employee emp = new Employee("jatin", "Ceo", 10000000 , "E01");
-		Employee emp1 = new Employee("j", "HR", 1000 , "E02");
-		Employee emp2 = new Employee("ja", "Manager", 10000 , "E03");
-		Employee emp3 = new Employee("jat", "Vp", 100000 , "E04");
+		Employee emp1 = new Employee("james", "HR", 1000 , "E02");
+		Employee emp2 = new Employee("goku", "Manager", 10000 , "E03");
+		Employee emp3 = new Employee("naruto", "Vp", 100000 , "E04");
 		
 		employee_data.put("E01", emp);
 		employee_data.put("E02", emp1);
@@ -23,13 +23,15 @@ public class EmployeeDao {
 	}	
 	
 	
-	public List<Employee> getAllUser(){
-		List<Employee> emp_list = new ArrayList<Employee>();
-		
+	//public List<Employee> getAllUser(){
+	public String getAllUser(){
+		//List<Employee> emp_list = new ArrayList<Employee>();
+		String emp_list = "";
         
         for (Employee empo : employee_data.values())  
-            emp_list.add((Employee)empo);
+            emp_list = emp_list+empo.getName()+"       ";
 		
+        
 		return emp_list;
 	}
 	

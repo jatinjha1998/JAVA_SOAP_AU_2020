@@ -29,8 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	@WebMethod
-	public List<Employee> getAllUser(){
-		
+	
+	//public List<Employee> getAllUser(){
+	public String getAllUser(){
 		return ed.getAllUser();
 	}
 	

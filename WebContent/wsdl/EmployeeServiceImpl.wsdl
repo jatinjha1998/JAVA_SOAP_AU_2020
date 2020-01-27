@@ -4,7 +4,6 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema targetNamespace="http://repos.accolite.com" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://xml.apache.org/xml-soap"/>
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
    <complexType name="Employee">
     <sequence>
@@ -12,22 +11,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="name" nillable="true" type="xsd:string"/>
      <element name="position" nillable="true" type="xsd:string"/>
      <element name="salary" type="xsd:double"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOf_xsd_anyType">
-    <complexContent>
-     <restriction base="soapenc:Array">
-      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
-     </restriction>
-    </complexContent>
-   </complexType>
-  </schema>
-  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://repos.accolite.com"/>
-   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
-   <complexType name="Vector">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
     </sequence>
    </complexType>
   </schema>
@@ -87,7 +70,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:message name="getAllUserResponse">
 
-      <wsdl:part name="getAllUserReturn" type="impl:ArrayOf_xsd_anyType">
+      <wsdl:part name="getAllUserReturn" type="xsd:string">
 
       </wsdl:part>
 
