@@ -1,0 +1,56 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmployeeServiceImplService WSDL service -->
+
+  <service name="EmployeeServiceImpl" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://repos.accolite.com"/>
+      <parameter name="wsdlServiceElement" value="EmployeeServiceImplService"/>
+      <parameter name="schemaUnqualified" value="http://repos.accolite.com,http://xml.apache.org/xml-soap"/>
+      <parameter name="wsdlServicePort" value="EmployeeServiceImpl"/>
+      <parameter name="className" value="com.accolite.repos.EmployeeServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="EmployeeServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getUsers" qname="operNS:getUsers" xmlns:operNS="http://repos.accolite.com" returnQName="getUsersReturn" returnType="rtns:Employee" xmlns:rtns="http://repos.accolite.com" soapAction="" >
+        <parameter qname="id" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addUsers" qname="operNS:addUsers" xmlns:operNS="http://repos.accolite.com" soapAction="" >
+        <parameter qname="emp" type="tns:Employee" xmlns:tns="http://repos.accolite.com"/>
+      </operation>
+      <operation name="getAllUser" qname="operNS:getAllUser" xmlns:operNS="http://repos.accolite.com" returnQName="getAllUserReturn" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://repos.accolite.com" returnItemType="tns2:anyType" xmlns:tns2="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="editUsers" qname="operNS:editUsers" xmlns:operNS="http://repos.accolite.com" returnQName="editUsersReturn" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="id" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="empObj" type="tns:Employee" xmlns:tns="http://repos.accolite.com"/>
+      </operation>
+      <operation name="deleteUsers" qname="operNS:deleteUsers" xmlns:operNS="http://repos.accolite.com" soapAction="" >
+        <parameter qname="id" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getUsers editUsers getAllUser deleteUsers addUsers"/>
+
+      <typeMapping
+        xmlns:ns="http://repos.accolite.com"
+        qname="ns:Employee"
+        type="java:com.accolite.repos.Employee"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://repos.accolite.com"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

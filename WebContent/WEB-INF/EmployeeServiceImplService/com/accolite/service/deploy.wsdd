@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmployeeServiceImplService WSDL service -->
+
+  <service name="EmployeeServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.accolite.com"/>
+      <parameter name="wsdlServiceElement" value="EmployeeServiceImplService"/>
+      <parameter name="schemaQualified" value="http://service.accolite.com,http://repos.accolite.com"/>
+      <parameter name="wsdlServicePort" value="EmployeeServiceImpl"/>
+      <parameter name="className" value="com.accolite.service.EmployeeServiceImpl"/>
+      <parameter name="wsdlPortType" value="EmployeeServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.accolite.com" xmlns:retNS="http://service.accolite.com" xmlns:rtns="http://repos.accolite.com" name="getUsers" qname="operNS:getUsers" returnQName="retNS:getUsersReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://service.accolite.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.accolite.com" name="addUsers" qname="operNS:addUsers" soapAction="">
+        <parameter xmlns:pns="http://service.accolite.com" xmlns:tns="http://repos.accolite.com" qname="pns:emp" type="tns:Employee"/>
+      </operation>
+      <operation xmlns:operNS="http://service.accolite.com" xmlns:retNS="http://service.accolite.com" xmlns:rtns="http://service.accolite.com" xmlns:tns="http://service.accolite.com" name="getAllUser" qname="operNS:getAllUser" returnQName="retNS:getAllUserReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.accolite.com" xmlns:retNS="http://service.accolite.com" xmlns:rtns="http://repos.accolite.com" name="editUsers" qname="operNS:editUsers" returnQName="retNS:editUsersReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://service.accolite.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+        <parameter xmlns:pns="http://service.accolite.com" xmlns:tns="http://repos.accolite.com" qname="pns:empObj" type="tns:Employee"/>
+      </operation>
+      <operation xmlns:operNS="http://service.accolite.com" name="deleteUsers" qname="operNS:deleteUsers" soapAction="">
+        <parameter xmlns:pns="http://service.accolite.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getUsers editUsers getAllUser deleteUsers addUsers"/>
+
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;getUsersResponse" type="java:com.accolite.service.GetUsersResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;editUsers" type="java:com.accolite.service.EditUsers" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;deleteUsers" type="java:com.accolite.service.DeleteUsers" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;getAllUser" type="java:com.accolite.service.GetAllUser" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;getUsers" type="java:com.accolite.service.GetUsers" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;getAllUserResponse" type="java:com.accolite.service.GetAllUserResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;addUsersResponse" type="java:com.accolite.service.AddUsersResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://service.accolite.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://repos.accolite.com" qname="ns:Employee" type="java:com.accolite.repos.Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;addUsers" type="java:com.accolite.service.AddUsers" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;deleteUsersResponse" type="java:com.accolite.service.DeleteUsersResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://service.accolite.com" qname="ns:&gt;editUsersResponse" type="java:com.accolite.service.EditUsersResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

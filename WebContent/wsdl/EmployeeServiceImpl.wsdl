@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://repos.accolite.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://repos.accolite.com" xmlns:intf="http://repos.accolite.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://repos.accolite.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Employee">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="position" nillable="true" type="xsd:string"/>
+     <element name="salary" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_anyType">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://repos.accolite.com"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="addUsersRequest">
+
+      <wsdl:part name="emp" type="impl:Employee">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editUsersResponse">
+
+      <wsdl:part name="editUsersReturn" type="xsd:boolean">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUsersResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteUsersRequest">
+
+      <wsdl:part name="id" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editUsersRequest">
+
+      <wsdl:part name="id" type="xsd:string">
+
+      </wsdl:part>
+
+      <wsdl:part name="empObj" type="impl:Employee">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUsersResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersResponse">
+
+      <wsdl:part name="getUsersReturn" type="impl:Employee">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUserResponse">
+
+      <wsdl:part name="getAllUserReturn" type="impl:ArrayOf_xsd_anyType">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUserRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getUsersRequest">
+
+      <wsdl:part name="id" type="xsd:string">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EmployeeServiceImpl">
+
+      <wsdl:operation name="getUsers" parameterOrder="id">
+
+         <wsdl:input message="impl:getUsersRequest" name="getUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getUsersResponse" name="getUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUsers" parameterOrder="emp">
+
+         <wsdl:input message="impl:addUsersRequest" name="addUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addUsersResponse" name="addUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUser">
+
+         <wsdl:input message="impl:getAllUserRequest" name="getAllUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllUserResponse" name="getAllUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editUsers" parameterOrder="id empObj">
+
+         <wsdl:input message="impl:editUsersRequest" name="editUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editUsersResponse" name="editUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUsers" parameterOrder="id">
+
+         <wsdl:input message="impl:deleteUsersRequest" name="deleteUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteUsersResponse" name="deleteUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EmployeeServiceImplSoapBinding" type="impl:EmployeeServiceImpl">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllUserRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllUserResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteUsersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteUsersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://repos.accolite.com" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EmployeeServiceImplService">
+
+      <wsdl:port binding="impl:EmployeeServiceImplSoapBinding" name="EmployeeServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/SoapAssgn/services/EmployeeServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
